@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieWiki</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script type="text/javascript" src="{% static 'js/htmx.min.js' %}" defer>
+        <body>
+        <header>
+            <h1>MovieWiki</h1>
+
+            <nav>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/catalogue">Каталог</a></li>
+                    <li><a href="/search">Поиск</a></li>
+                </ul>
+            </nav>
+
+            <form method="post" action="{% url 'search_movies' %}">
+                {% csrf_token %}
+                <input type="text" name="search_term" id="movie-search-box">
+                    <button type="submit">Search</button>
+            </form>
+            <div id="search-list" class="search-list">
+                {% for movie in search_results %}
+                    <div class="search-result-item">
+                        <h3><a href="{% url 'movie_details' movie.imdbID %}">{{ movie.Title }}</a></h3>
+                        <p>{{ movie.Year }}</p>
+                    </div>
+                {% empty %}
+                    <p>No results found.</p>
+                {% endfor %}
+            </div>
+        </header>
+
+        <main>
+            <h2>Каталог фильмов</h2>
+            {% for genre, genre_movies_list in genre_movies.items %}
+                <h3>{{ genre }}</h3>
+                <section class="movie-list">
+
+                    {% for movie in genre_movies_list %}
+                        <div class="movie-card">
+                            <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+                                <h4>{{ movie.title }}</h4>
+                                <a href="/mdtb/movie/{{ movie.id }}">Подробнее</a>
+
+
+                        </div>
+                    {% endfor %}
+                </section>
+            {% endfor %}
+        </main>
+
+        <footer>
+            <p>&copy; Tolebi Raptayev</p>
+        </footer>
+        </body>
+        </html>

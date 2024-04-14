@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieWiki</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+        <h1>MovieWiki</h1>
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/catalogue">Catalogue</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search" tabindex="-1">Search</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+        <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Поиск фильмов">
+            <button type="submit">Найти</button>
+        </form>
+    </header>
+<div id="result-grid">
+  <div class="movie-poster">
+    <img src="{{ movie_details.Poster }}" alt="movie poster">
+  </div>
+  <div class="movie-info">
+    <h3 class="movie-title">{{ movie_details.Title }}</h3>
+    <ul class="movie-misc-info">
+      <li class="year">Year: {{ movie_details.Year }}</li>
+      <li class="rated">Ratings: {{ movie_details.Rated }}</li>
+      <li class="released">Released: {{ movie_details.Released }}</li>
+    </ul>
+    <p class="genre"><b>Genre:</b> {{ movie_details.Genre }}</p>
+    <p class="writer"><b>Writer:</b> {{ movie_details.Writer }}</p>
+    <p class="actors"><b>Actors: </b>{{ movie_details.Actors }}</p>
+    <p class="plot"><b>Plot:</b> {{ movie_details.Plot }}</p>
+    <p class="language"><b>Language:</b> {{ movie_details.Language }}</p>
+    <p class="awards"><b><i class="fas fa-award"></i></b> {{ movie_details.Awards }}</p>
+  </div>
+</div>
+</body>

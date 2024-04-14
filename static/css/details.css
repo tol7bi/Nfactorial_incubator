@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+form input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#result-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.movie-poster img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.movie-info {
+    margin-left: 20px;
+}
+
+.movie-title {
+    margin: 0;
+    font-size: 24px;
+}
+
+.movie-misc-info {
+    list-style-type: none;
+    padding: 0;
+}
+
+.movie-misc-info li {
+    margin-bottom: 5px;
+}
+
+.genre, .writer, .actors, .plot, .language, .awards {
+    margin: 5px 0;
+    line-height: 1.5;
+}

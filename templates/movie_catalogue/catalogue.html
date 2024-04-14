@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieWiki</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+
+
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+        <h1>MovieWiki</h1>
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/catalogue">Catalogue</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search" tabindex="-1">Search</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div id="search-list" class="search-list">
+        {% for movie in search_results %}
+            <div class="search-result-item">
+                <h3><a href="{% url 'movie_details' movie.imdbID %}">{{ movie.Title }}</a></h3>
+                <p>{{ movie.Year }}</p>
+            </div>
+
+        {% endfor %}
+    </div>
+</header>
+<div id="genre-list">
+    <h2>Genres</h2>
+    {% for genre in genres_list %}
+
+        <form method="post" action="{% url 'catalogue' %}">
+            {% csrf_token %}
+            <input type="hidden" name="selected_genre" value="{{ genre }}">
+            <button type="submit">{{ genre }}</button>
+        </form>
+
+    {% endfor %}
+</div>
+<section class="movie-list">
+    {% for movie in movies %}
+        <div class="movie-card" data-id="{{ movie.imdbID }}">
+            <div class="search-item-thumbnail">
+                <img src="{{ movie.Poster }}">
+            </div>
+            <div class="search-item-info">
+                <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+                <h4 class="truncated-heading">{{ movie.title }}</h4>
+                <a href="/mdtb/movie/{{ movie.id }}">Details</a>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+
+</body>
+</html>
