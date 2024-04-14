@@ -5,9 +5,17 @@
 
 Инициализация виртуального окружения:
 
+
+
 cd /nfac
 
-source venv/bin/activate 
+python -m venv venv
+
+source venv/bin/activate для macos/linux
+venv\Scripts\activate для windows
+
+
+
 
 Установка зависимстей:
 
